@@ -13,12 +13,13 @@ class TicketDetailsUsecase {
     return repository.getTicketList(from, to);
   }
 
-  Future<BaseModel<Price>> getTicketPrice(
-      String flightNumber, String from, String to) async {
-    return repository.getTicketPrice(flightNumber, from, to);
-  }
-
-  Stream<List<Ticket>> getList() {
-
+  Future<Ticket> getTicketPrice(Ticket ticket) async {
+    var value = await repository.getTicketPrice(
+        ticket.flightNumber, ticket.from, ticket.to);
+    if (value.data != null) {
+      return ticket..setPrice(value.data);
+    } else {
+      return ticket..setPriceError(value.getException);
+    }
   }
 }

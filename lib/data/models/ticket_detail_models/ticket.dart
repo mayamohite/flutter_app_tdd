@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_app_tdd/core/network/server_error.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/price.dart';
 
@@ -16,9 +14,7 @@ class Ticket {
   int numberOfStops;
   Airline airline;
   Price price;
-  var controller = StreamController<bool>();
-  get priceFetched =>  controller.stream;
-
+  bool isPriceError = false;
 
   Ticket({
     this.from,
@@ -45,12 +41,13 @@ class Ticket {
         airline: Airline.fromJson(json["airline"]));
   }
 
-  setPrice(price){
+  setPrice(price) {
     this.price = price;
-    controller.sink.add(true);
+    isPriceError = false;
   }
 
-  setPriceError(ServerError error){
-    controller.sink.addError(error);
+  setPriceError(ServerError error) {
+    this.price = null;
+    isPriceError = true;
   }
 }

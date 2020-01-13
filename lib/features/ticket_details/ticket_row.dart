@@ -72,21 +72,16 @@ class _TicketViewState extends State<TicketView> {
                     )
                   ],
                 ),
-                StreamBuilder(
-                  stream: widget.ticket.priceFetched,
-                  builder: (context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.hasData) {
-                      return priceUI();
-                    } else if (snapshot.hasError) {
-                      return Text("Price: null}");
-                    } else {
-                      return SpinKitWave(
-                        color: Colors.cyan[100],
-                        size: 20.0,
-                      );
-                    }
-                  },
-                ),
+                Container(
+                    child: (widget.ticket.price == null &&
+                            widget.ticket.isPriceError == false
+                        ? SpinKitWave(
+                            color: Colors.cyan[100],
+                            size: 20.0,
+                          )
+                        : (widget.ticket.price != null)
+                            ? priceUI(widget.ticket)
+                            : Text("Price: null")))
               ],
             ),
           ),
@@ -95,7 +90,7 @@ class _TicketViewState extends State<TicketView> {
     );
   }
 
-  priceUI() {
+  priceUI(Ticket ticket) {
     return Column(
       children: <Widget>[
         Text(

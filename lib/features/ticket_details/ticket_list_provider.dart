@@ -14,24 +14,13 @@ class TicketDetailsProvider with ChangeNotifier {
 
   TicketDetailsProvider() {
     _ticketDetailsUsecase = Injector.getInjector().get<TicketDetailsUsecase>();
+  }
 
-    _subject.listen((ticketList) {
-      Stream.fromIterable(ticketList).flatMap(
-            (ticket) {
-          _ticketDetailsUsecase
-              .getTicketPrice(ticket.flightNumber, ticket.from, ticket.to)
-              .then(
-                (onValue) {
-              if (onValue.data != null)
-                ticket.setPrice(onValue.data);
-              else
-                ticket.setPriceError(onValue.getException);
-            },
-          );
-          return Stream.empty();
-        },
-      ).listen((onDone) => {print("On Done  : ${onDone}")});
-    });
+  @override
+  Future<dynamic> get done => _subject.done;
+
+  Stream<Ticket> getTicketPrice(ticket) {
+    return Stream.fromFuture(_ticketDetailsUsecase.getTicketPrice(ticket));
   }
 
   getList(String from, String to) async {
@@ -40,6 +29,23 @@ class TicketDetailsProvider with ChangeNotifier {
 
     if (ticketList.data != null) {
       _subject.sink.add(ticketList.data);
+
+      Stream<Ticket> updatedTicket =
+          Stream.fromIterable(ticketList.data).flatMap((tk) {
+        return getTicketPrice(tk);
+      });
+      updatedTicket.listen((onData) {
+        print("Future Data ${onData.flightNumber}");
+        _subject.sink.add(ticketList.data);
+      }, onError: (error) {
+        print("Future Error");
+        _subject.sink.add(ticketList.data);
+      }, onDone: () {
+        print("Future Done");
+        ticketList.data.forEach((i) => {
+              //ToDo we are getting updated data here
+            });
+      });
     } else {
       _subject.addError(ticketList.getException);
     }
