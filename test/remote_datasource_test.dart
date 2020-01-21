@@ -7,11 +7,17 @@ import 'package:test/test.dart';
 import 'test_objects.dart';
 
 void main() {
+  MockApiClient apiClient;
+  MockDio dio;
+  RemoteDatasource remoteDatasource;
+
+  setUp(() {
+    apiClient = MockApiClient();
+    dio = MockDio();
+    remoteDatasource = new RemoteDatasource(dio: dio, apiClient: apiClient);
+  });
+
   test('Get price from Rest API with success', () async {
-    final apiClient = MockApiClient();
-    final dio = MockDio();
-    RemoteDatasource remoteDatasource =
-        new RemoteDatasource(dio: dio, apiClient: apiClient);
     when(apiClient.getTicketPrice("AC-971", "DEL", "CHE"))
         .thenAnswer((_) async => TestObjects.getFuturePrice());
     var actualValue =
@@ -21,11 +27,6 @@ void main() {
   });
 
   test('Get price from Rest API with failure', () async {
-    final apiClient = MockApiClient();
-    final dio = MockDio();
-    RemoteDatasource remoteDatasource =
-        new RemoteDatasource(dio: dio, apiClient: apiClient);
-
     when(apiClient.getTicketPrice("AC-971", "DEL", "CHE")).thenThrow(DioError(
         type: DioErrorType.RESPONSE,
         error: "404 error",
@@ -37,10 +38,6 @@ void main() {
   });
 
   test('Get Ticket List from Rest API with success', () async {
-    final apiClient = MockApiClient();
-    final dio = MockDio();
-    RemoteDatasource remoteDatasource =
-        new RemoteDatasource(dio: dio, apiClient: apiClient);
     when(apiClient.getFlightTickets("DEL", "CHE"))
         .thenAnswer((_) async => TestObjects.getFutureTickeList());
     var actualValue = await remoteDatasource.ticketList("DEL", "CHE");
@@ -48,10 +45,6 @@ void main() {
   });
 
   test('Get Ticket List from Rest API with failure', () async {
-    final apiClient = MockApiClient();
-    final dio = MockDio();
-    RemoteDatasource remoteDatasource =
-        new RemoteDatasource(dio: dio, apiClient: apiClient);
     when(apiClient.getFlightTickets("DEL", "CHE")).thenThrow(DioError(
         type: DioErrorType.RESPONSE,
         error: "404 error",
