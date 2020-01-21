@@ -16,9 +16,6 @@ class TicketDetailsProvider with ChangeNotifier {
     _ticketDetailsUsecase = Injector.getInjector().get<TicketDetailsUsecase>();
   }
 
-  @override
-  Future<dynamic> get done => _subject.done;
-
   Stream<Ticket> getTicketPrice(ticket) {
     return Stream.fromFuture(_ticketDetailsUsecase.getTicketPrice(ticket));
   }
