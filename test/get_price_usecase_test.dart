@@ -51,6 +51,11 @@ void main() {
     expect(actualValue.data, null);
     expect(actualValue.getException, isNotNull);
   });
+
+  tearDown(() {
+    mockRepository = null;
+    ticketDetailsUsecase = null;
+  });
 }
 
 class MockRepository extends Mock implements RepositoryImpl {}

@@ -21,7 +21,7 @@ void main() {
     when(apiClient.getTicketPrice("AC-971", "DEL", "CHE"))
         .thenAnswer((_) async => TestObjects.getFuturePrice());
     var actualValue =
-        await remoteDatasource.getTicketPrice("AC-971", "DEL", "CHE");
+    await remoteDatasource.getTicketPrice("AC-971", "DEL", "CHE");
     expect(actualValue.data, isNotNull);
     expect(actualValue.getException, null);
   });
@@ -32,7 +32,7 @@ void main() {
         error: "404 error",
         response: Response(statusCode: 404)));
     var actualValue =
-        await remoteDatasource.getTicketPrice("AC-971", "DEL", "CHE");
+    await remoteDatasource.getTicketPrice("AC-971", "DEL", "CHE");
     expect(actualValue.getException, isNotNull);
     expect(actualValue.data, null);
   });
@@ -53,6 +53,12 @@ void main() {
     var actualValue = await remoteDatasource.ticketList("DEL", "CHE");
     expect(actualValue.getException, isNotNull);
     expect(actualValue.data, null);
+  });
+
+  tearDown(() {
+    apiClient = null;
+    dio = null;
+    remoteDatasource = null;
   });
 }
 
