@@ -26,7 +26,7 @@ void main() {
     expect(actualValue.getException, null);
   });
 
- /* test('Get price from Rest API with failure', () async {
+  test('Get price from Rest API with failure', () async {
     when(apiClient.getTicketPrice("AC-971", "DEL", "CHE")).thenThrow(DioError(
         type: DioErrorType.RESPONSE,
         error: "404 error",
@@ -35,7 +35,7 @@ void main() {
     await remoteDatasource.getTicketPrice("AC-971", "DEL", "CHE");
     expect(actualValue.getException, isNotNull);
     expect(actualValue.data, null);
-  });*/
+  });
 
   test('Get Ticket List from Rest API with success', () async {
     when(apiClient.getFlightTickets("DEL", "CHE"))
