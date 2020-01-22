@@ -54,7 +54,6 @@ void main() {
 
   tearDown(() {
 
-
     mockRepository = null;
     ticketDetailsUsecase = null;
   });
