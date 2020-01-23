@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class Airline {
   int id;
   String name;
@@ -14,5 +16,22 @@ class Airline {
       name: json["name"] as String,
       logo: json["logo"] as String,
     );
+  }
+
+  @override
+  int get hashCode => hashValues(id, name, logo);
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (runtimeType == other.runtimeType) {
+      return true;
+    }
+    final Airline otherAirline = other;
+    return id == otherAirline.id &&
+        name == otherAirline.name &&
+        logo == otherAirline.logo;
   }
 }

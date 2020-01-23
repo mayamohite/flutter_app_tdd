@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_app_tdd/core/network/server_error.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/price.dart';
 
@@ -52,5 +54,27 @@ class Ticket {
   setPriceError(ServerError error) {
     this.price = null;
     isPriceError = true;
+  }
+
+  @override
+  int get hashCode => hashValues(from, to, flightNumber, departure, arrival,
+      duration, instructions, numberOfStops, airline, price, isPriceError);
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) return true;
+    if (runtimeType == other.runtimeType) return true;
+    final Ticket otherTicket = other;
+    return from == otherTicket.from &&
+        to == otherTicket.to &&
+        flightNumber == otherTicket.flightNumber &&
+        departure == otherTicket.departure &&
+        arrival == otherTicket.arrival &&
+        duration == otherTicket.duration &&
+        instructions == otherTicket.instructions &&
+        numberOfStops == otherTicket.numberOfStops &&
+        airline == otherTicket.airline &&
+        price == otherTicket.price &&
+        isPriceError == otherTicket.isPriceError;
   }
 }

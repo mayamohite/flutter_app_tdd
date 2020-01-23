@@ -12,7 +12,18 @@ void main() {
   test('Price from Json', () {
     final price = Price.fromJson(JsonObjects.price);
     expect(price, isNotNull);
-    //Price actual = Price(3560, 37, "INR", "6E-ARI", "DEL", "CHE"); //ToDo check price.fromJson object to Price() object
   });
 
+  test('Check Price Object equality', () {
+    Price expectedPrice = Price(
+        price: 3560,
+        seats: 37,
+        currency: "INR",
+        flightNumber: "6E-ARI",
+        from: "DEL",
+        to: "CHE");
+
+    final actualprice = Price.fromJson(JsonObjects.price);
+    expect(actualprice, expectedPrice);
+  });
 }

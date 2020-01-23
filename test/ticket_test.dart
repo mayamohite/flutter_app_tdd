@@ -1,3 +1,4 @@
+import 'package:flutter_app_tdd/data/models/ticket_detail_models/airline.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/price.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/ticket.dart';
 import 'package:mockito/mockito.dart';
@@ -45,5 +46,26 @@ void main() {
     ticket.setPriceError(serverError);
     expect(ticket.price, null);
     expect(ticket.isPriceError, true);
+  });
+
+  test('Check Ticket object equality', () {
+    final actualTicket = Ticket.fromJson(JsonObjects.ticket);
+    final actualAirline = Airline(
+        id: 1103,
+        name: "Spicejet",
+        logo: "https:\/\/api.androidhive.info\/json\/images\/spicejet.png");
+
+    final expectedTicket = Ticket(
+        from: "DEL",
+        to: "CHE",
+        flightNumber: "AC-971",
+        departure: "08:11",
+        arrival: "10:59",
+        duration: "2h 48m",
+        instructions: "",
+        numberOfStops: 1,
+        airline: actualAirline);
+
+    expect(actualTicket, expectedTicket);
   });
 }

@@ -11,6 +11,15 @@ void main() {
   test('Airline from json check', () {
     final airline = Airline.fromJson(JsonObjects.ticket['airline']);
     expect(airline, isNotNull);
+  });
 
+  test('Check Price Object equality', () {
+    Airline expectedAirline = Airline(
+        id: 1103,
+        name: "Spicejet",
+        logo: "https:\/\/api.androidhive.info\/json\/images\/spicejet.png");
+
+    final actualAirline = Airline.fromJson(JsonObjects.ticket['airline']);
+    expect(actualAirline, expectedAirline);
   });
 }
