@@ -45,7 +45,7 @@ void main() {
     //Todo
   });
 
-/*  test('Get Ticket List from Rest API with failure', () async {
+  test('Get Ticket List from Rest API with failure', () async {
     when(apiClient.getFlightTickets("DEL", "CHE")).thenThrow(DioError(
         type: DioErrorType.RESPONSE,
         error: "404 error",
@@ -54,18 +54,13 @@ void main() {
     var actualValue = await remoteDatasource.ticketList("DEL", "CHE");
     expect(actualValue.getException, isNotNull);
     expect(actualValue.data, null);
-  });*/
+  });
 
   tearDown(() {
     apiClient = null;
     dio = null;
     remoteDatasource = null;
   });
-
-//
-//
-//
-
 }
 
 class MockApiClient extends Mock implements ApiClient {}

@@ -6,7 +6,7 @@ import 'json_objects.dart';
 void main() {
   test('Price null check', () {
     final price = Price.fromJson(null);
-    expect(null, null);
+    expect(price, null);
   });
 
   test('Price from Json', () {
