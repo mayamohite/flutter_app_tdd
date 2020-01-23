@@ -39,9 +39,6 @@ class TicketDetailsProvider with ChangeNotifier {
         _subject.sink.add(ticketList.data);
       }, onDone: () {
         print("Future Done");
-        ticketList.data.forEach((i) => {
-              //ToDo we are getting updated data here
-            });
       });
     } else {
       _subject.addError(ticketList.getException);

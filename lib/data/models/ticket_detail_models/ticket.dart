@@ -29,6 +29,9 @@ class Ticket {
   });
 
   factory Ticket.fromJson(Map<String, dynamic> json) {
+    if (json == null || json.length == 0) {
+      return null;
+    }
     return Ticket(
         from: json["from"],
         to: json["to"],

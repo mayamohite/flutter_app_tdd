@@ -15,6 +15,9 @@ class Price {
       this.to});
 
   factory Price.fromJson(Map<String, dynamic> json) {
+    if (json == null || json.length == 0) {
+      return null;
+    }
     return Price(
       price: json["price"],
       seats: json["seats"],
