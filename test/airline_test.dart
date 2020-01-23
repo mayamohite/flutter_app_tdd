@@ -11,5 +11,6 @@ void main() {
   test('Airline from json check', () {
     final airline = Airline.fromJson(JsonObjects.ticket['airline']);
     expect(airline, isNotNull);
+
   });
 }
