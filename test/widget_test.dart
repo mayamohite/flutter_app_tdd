@@ -26,5 +26,11 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });
+*/
+ /* testWidgets('Basic UI test', (WidgetTester tester) async {
+    await tester.pumpWidget(MyApp()); //(title: "MM", message: "TT"));
+    expect(find.text('Maya'), findsOneWidget);
+
   });*/
 }

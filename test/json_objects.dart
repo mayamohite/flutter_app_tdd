@@ -4,8 +4,8 @@ class JsonObjects {
     "price": 3560,
     "seats": 37,
     "currency": "INR",
-    "flight_number": "6E-ARIfrom=DEL",
-    "from": "",
+    "flight_number": "6E-ARI",
+    "from": "DEL",
     "to": "CHE"
   };
 
