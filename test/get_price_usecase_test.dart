@@ -56,6 +56,8 @@ void main() {
     mockRepository = null;
     ticketDetailsUsecase = null;
   });
+
+
 }
 
 class MockRepository extends Mock implements RepositoryImpl {}
