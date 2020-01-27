@@ -6,6 +6,7 @@ import 'features/ticket_details/ticket_list_provider.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
 void main() {
+  print("main method");
   runApp(MyApp());
   ModuleContainer().initialise(Injector.getInjector());
 }
@@ -13,14 +14,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("My app build");
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: ChangeNotifierProvider<TicketDetailsProvider>(
-          create: (_) => TicketDetailsProvider(),
-          child: TicketList(),
-        ));
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: TicketList(),
+    );
   }
 }

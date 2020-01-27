@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/ticket.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,6 +17,19 @@ class TicketView extends StatefulWidget {
 class _TicketViewState extends State<TicketView> {
   bool _enabled = true;
 
+  image(url) {
+    try {
+      return Image.network(
+        url,
+        fit: BoxFit.fill,
+        height: 20,
+        width: 20,
+      );
+    } catch (_) {
+      return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var url = widget.ticket.airline.logo;
@@ -24,7 +38,7 @@ class _TicketViewState extends State<TicketView> {
         padding: EdgeInsets.only(left: 16, right: 16, top: 5),
         child: Card(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Padding(
             padding: EdgeInsets.only(top: 10, bottom: 10),
             child: Row(
@@ -34,11 +48,14 @@ class _TicketViewState extends State<TicketView> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Image.network(
-                          url,
-                          fit: BoxFit.fill,
-                          height: 20,
+                        CachedNetworkImage(
                           width: 20,
+                          height: 20,
+                          imageUrl: url,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                         Padding(padding: EdgeInsets.only(right: 5.0)),
                         Text(widget.ticket.airline.name),
@@ -74,14 +91,14 @@ class _TicketViewState extends State<TicketView> {
                 ),
                 Container(
                     child: (widget.ticket.price == null &&
-                            widget.ticket.isPriceError == false
+                        widget.ticket.isPriceError == false
                         ? SpinKitWave(
-                            color: Colors.cyan[100],
-                            size: 20.0,
-                          )
+                      color: Colors.cyan[100],
+                      size: 20.0,
+                    )
                         : (widget.ticket.price != null)
-                            ? priceUI(widget.ticket)
-                            : Text("Price: null")))
+                        ? priceUI(widget.ticket)
+                        : Text("Price: null")))
               ],
             ),
           ),
@@ -100,6 +117,7 @@ class _TicketViewState extends State<TicketView> {
         Padding(padding: EdgeInsets.only(top: 10)),
         Text(
           "${widget.ticket.price.currency} ${widget.ticket.price.price}",
+          key: Key('price${ticket.flightNumber}'),
           style: TextStyle(color: Colors.black, fontSize: 16),
         )
       ],

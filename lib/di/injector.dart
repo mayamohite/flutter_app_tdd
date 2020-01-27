@@ -1,13 +1,16 @@
 import 'package:flutter_app_tdd/core/network/api_client.dart';
 import 'package:flutter_app_tdd/features/ticket_details/get_ticket_details_usecase.dart';
+import 'package:flutter_app_tdd/features/ticket_details/ticket_list_provider.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_app_tdd/data/datasource/local/local_datasource.dart';
 import 'package:flutter_app_tdd/data/datasource/remote/remote_datasource.dart';
 import 'package:flutter_app_tdd/data/repositories/ticket_detail_repository_impl.dart';
 import 'package:dio/dio.dart' hide Headers;
+import 'package:meta/meta.dart';
 
 class ModuleContainer {
-  Injector initialise(Injector injector) {
+  Injector initialise(Injector injector,
+      {@required TicketDetailsUsecase ticketDetailsUsecase}) {
     injector.map<Dio>((i) => Dio());
     injector.map<ApiClient>((i) => ApiClient(i.get<Dio>()));
     injector.map<LocalDatasource>((i) => LocalDatasource(), isSingleton: true);
@@ -20,8 +23,12 @@ class ModuleContainer {
             localDatasource: i.get<LocalDatasource>(),
             remoteDatasource: i.get<RemoteDatasource>()),
         isSingleton: true);
-    injector.map<TicketDetailsUsecase>(
-        (i) => TicketDetailsUsecase(repository: i.get<RepositoryImpl>()));
+
+    injector.map<TicketDetailsUsecase>((i) =>
+        ticketDetailsUsecase ??
+        TicketDetailsUsecase(repository: i.get<RepositoryImpl>()));
+    injector.map<TicketDetailsProvider>((i) => TicketDetailsProvider(
+        ticketDetailsUsecase: i.get<TicketDetailsUsecase>()));
     return injector;
   }
 }

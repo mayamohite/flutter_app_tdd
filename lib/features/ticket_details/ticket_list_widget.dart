@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_tdd/core/network/server_error.dart';
 import 'package:flutter_app_tdd/features/ticket_details/ticket_row.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/ticket.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_tdd/features/ticket_details/ticket_list_provider.dart';
 
 class TicketList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+    print("Test :: Create state :: ");
     return _TicketListState();
   }
 }
@@ -18,16 +20,19 @@ class _TicketListState extends State<TicketList> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ticketListProvider = Provider.of<TicketDetailsProvider>(context);
+    print("didChangeDependencies");
+    ticketListProvider = Injector.getInjector().get<TicketDetailsProvider>();
     getData();
   }
 
   getData() {
-    ticketListProvider.getList("DEL","TO");
+    print("ticketListProvider.subject.stream");
+    ticketListProvider.getList("DEL", "CHE");
   }
 
   @override
   Widget build(BuildContext context) {
+    print("ticketListProvider build");
     return Scaffold(
       appBar: new AppBar(
         title: new Text("Flight Tickets"),
@@ -50,7 +55,11 @@ class _TicketListState extends State<TicketList> {
     return Center(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [CircularProgressIndicator()],
+      children: [
+        CircularProgressIndicator(
+          key: Key('Loader'),
+        )
+      ],
     ));
   }
 
@@ -66,6 +75,7 @@ class _TicketListState extends State<TicketList> {
 
   Widget _buildUserWidget(List<Ticket> data) {
     return ListView.builder(
+      key: Key('list'),
       itemBuilder: (BuildContext context, index) {
         Ticket ticket = data[index];
         return TicketView(ticket: ticket);

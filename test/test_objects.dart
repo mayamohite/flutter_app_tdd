@@ -55,14 +55,14 @@ class TestObjects {
     return ticketListModel;
   }
 
-  static Future<BaseModel<List<Ticket>>> getTicketBaseModeList() {
+  static Future<BaseModel<List<Ticket>>> getTicketBaseModeList() async{
+    await Future.delayed(Duration(milliseconds: 500));
     BaseModel<List<Ticket>> ticketListBaseModel = BaseModel()
       ..setData(ticketList);
-    var completer = new Completer<BaseModel<List<Ticket>>>();
-    completer.complete(ticketListBaseModel);
-    Future<BaseModel<List<Ticket>>> priceModel = completer.future;
-    return priceModel;
+    return ticketListBaseModel;
   }
+
+
 
   static Future<BaseModel<List<Ticket>>> getFutureTicketBaseModelListError() {
     BaseModel<List<Ticket>> ticketListBaseModel = BaseModel()

@@ -5,15 +5,19 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:rxdart/rxdart.dart';
 import 'get_ticket_details_usecase.dart';
 
-class TicketDetailsProvider with ChangeNotifier {
+class TicketDetailsProvider {
   TicketDetailsUsecase _ticketDetailsUsecase;
-  final BehaviorSubject<List<Ticket>> _subject =
-      BehaviorSubject<List<Ticket>>();
+  final BehaviorSubject<List<Ticket>> _subject = BehaviorSubject<List<Ticket>>();
 
   BehaviorSubject<List<Ticket>> get subject => _subject;
 
-  TicketDetailsProvider() {
-    _ticketDetailsUsecase = Injector.getInjector().get<TicketDetailsUsecase>();
+  TicketDetailsProvider({@required TicketDetailsUsecase ticketDetailsUsecase}) {
+    _ticketDetailsUsecase =
+        ticketDetailsUsecase; //Injector.getInjector().get<TicketDetailsUsecase>();
+  }
+
+  setUsecase(TicketDetailsUsecase usecase) {
+    _ticketDetailsUsecase = usecase;
   }
 
   Stream<Ticket> getTicketPrice(ticket) {
