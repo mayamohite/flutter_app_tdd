@@ -39,7 +39,7 @@ void main() {
 */
   test('Get Ticket List from Rest API with success', () async {
     when(apiClient.getFlightTickets("DEL", "CHE"))
-        .thenAnswer((_) async => TestObjects.getFutureTickeList());
+        .thenAnswer((_) async => TestObjects.getFutureTicketList());
     var actualValue = await remoteDatasource.ticketList("DEL", "CHE");
     expect(actualValue.data.length, 5);
     //Todo

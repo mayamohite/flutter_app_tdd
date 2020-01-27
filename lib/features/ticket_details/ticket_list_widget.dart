@@ -6,6 +6,10 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_tdd/features/ticket_details/ticket_list_provider.dart';
 
+const LOADER_LIST_KEY = 'loaderList';
+const ERROR_VIEW_KEY = 'errorList';
+const LIST_KEY = "list";
+
 class TicketList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -57,7 +61,7 @@ class _TicketListState extends State<TicketList> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircularProgressIndicator(
-          key: Key('Loader'),
+          key: Key(LOADER_LIST_KEY),
         )
       ],
     ));
@@ -65,6 +69,7 @@ class _TicketListState extends State<TicketList> {
 
   Widget _buildErrorWidget(ServerError error) {
     return Center(
+      key: Key(ERROR_VIEW_KEY),
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -75,7 +80,7 @@ class _TicketListState extends State<TicketList> {
 
   Widget _buildUserWidget(List<Ticket> data) {
     return ListView.builder(
-      key: Key('list'),
+      key: Key(LIST_KEY),
       itemBuilder: (BuildContext context, index) {
         Ticket ticket = data[index];
         return TicketView(ticket: ticket);
