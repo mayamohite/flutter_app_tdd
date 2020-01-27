@@ -22,8 +22,8 @@ class _TicketListState extends State<TicketList> {
     getData();
   }
 
-  getData() async {
-    await ticketListProvider.getList("DEL","TO");
+  getData() {
+    ticketListProvider.getList("DEL","TO");
   }
 
   @override
