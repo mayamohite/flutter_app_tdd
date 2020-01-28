@@ -30,6 +30,17 @@ class Price {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['price'] = this.price;
+    data['seats'] = this.seats;
+    data['currency'] = this.currency;
+    data['flight_number'] = this.flightNumber;
+    data['from'] = this.from;
+    data['to'] = this.to;
+    return data;
+  }
+
   @override
   int get hashCode =>
       hashValues(price, seats, currency, flightNumber, from, to);

@@ -18,6 +18,14 @@ class Airline {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['logo'] = this.logo;
+    return data;
+  }
+
   @override
   int get hashCode => hashValues(id, name, logo);
 

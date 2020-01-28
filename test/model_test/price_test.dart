@@ -1,7 +1,7 @@
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/price.dart';
 import 'package:test/test.dart';
 
-import 'json_objects.dart';
+import '../data_setup/json_objects.dart';
 
 void main() {
   test('Price null check', () {
@@ -25,5 +25,15 @@ void main() {
 
     final actualprice = Price.fromJson(JsonObjects.price);
     expect(actualprice, expectedPrice);
+  });
+
+  test('Check Price Object parameters equality', () {
+    Price actualprice = Price.fromJson(JsonObjects.price_without_parameters);
+    expect(actualprice.price, null);
+    expect(actualprice.seats, null);
+    expect(actualprice.currency, null);
+    expect(actualprice.flightNumber, isNotNull);
+    expect(actualprice.from, null);
+    expect(actualprice.to, null);
   });
 }

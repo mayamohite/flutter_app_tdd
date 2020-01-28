@@ -1,6 +1,6 @@
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/airline.dart';
 import 'package:test/test.dart';
-import 'json_objects.dart';
+import '../data_setup/json_objects.dart';
 
 void main() {
   test('Airline null check', () {
@@ -13,7 +13,7 @@ void main() {
     expect(airline, isNotNull);
   });
 
-  test('Check Price Object equality', () {
+  test('Check Airline Object equality', () {
     Airline expectedAirline = Airline(
         id: 1103,
         name: "Spicejet",
@@ -21,5 +21,12 @@ void main() {
 
     final actualAirline = Airline.fromJson(JsonObjects.ticket['airline']);
     expect(actualAirline, expectedAirline);
+  });
+
+  test('Check Airline Object parameter nullability', () {
+    Airline actualAirline = Airline.fromJson(JsonObjects.airline_without_parameters);
+    expect(actualAirline.name, null);
+    expect(actualAirline.id, null);
+    expect(actualAirline.logo, null);
   });
 }
