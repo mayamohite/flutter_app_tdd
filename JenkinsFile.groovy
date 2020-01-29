@@ -22,6 +22,15 @@ pipeline {
                 git branch: "${params.current_branch}", url: 'https://github.com/mayamohite/flutter_app_tdd.git'
             }
         }
+        stage('Build Current Branch') {
+            steps {
+                echo ">>>> BULID: ${params.current_branch}"
+                sh '''
+            #!/bin/sh
+            flutter build apk --debug
+            '''
+            }
+        }
         stage('Test Current Branch') {
             steps {
                 echo ">>>> TEST: ${params.current_branch}"
