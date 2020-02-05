@@ -72,7 +72,7 @@ void main() {
       expect(currencyAndPriceFinder, findsOneWidget);
     });
 
-    // TODOO investigate - passes when run on its own, but fails when run from its enclosing group 🤷🏻‍♂️
+    // TODO investigate - passes when run on its own, but fails when run from its enclosing group 🤷🏻‍♂️
     testWidgets('shows a loading indicator if no price data is available',
         (tester) async {
       final price = TestObjects.price;

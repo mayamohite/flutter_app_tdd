@@ -3,7 +3,6 @@ import 'package:flutter_app_tdd/data/repositories/ticket_detail_repository_impl.
 import 'package:flutter_app_tdd/features/ticket_details/get_ticket_details_usecase.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-
 import '../data_setup/test_objects.dart';
 
 void main() {
@@ -57,6 +56,8 @@ void main() {
     mockRepository = null;
     ticketDetailsUsecase = null;
   });
+
+
 }
 
 class MockRepository extends Mock implements RepositoryImpl {}

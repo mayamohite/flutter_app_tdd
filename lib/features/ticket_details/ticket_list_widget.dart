@@ -36,7 +36,7 @@ class _TicketListState extends State<TicketList> {
           stream: ticketListProvider.subject.stream,
           builder: (context, AsyncSnapshot<List<Ticket>> snapshot) {
             if (snapshot.hasData) {
-              return _buildUserWidget(snapshot.data);
+              return _buildTicketWidget(snapshot.data);
             } else if (snapshot.hasError) {
               return _buildErrorWidget(snapshot.error as ServerError);
             } else {
@@ -64,7 +64,7 @@ class _TicketListState extends State<TicketList> {
     ));
   }
 
-  Widget _buildUserWidget(List<Ticket> data) {
+  Widget _buildTicketWidget(List<Ticket> data) {
     return ListView.builder(
       itemBuilder: (BuildContext context, index) {
         Ticket ticket = data[index];
