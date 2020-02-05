@@ -1,9 +1,8 @@
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/airline.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/price.dart';
 import 'package:flutter_app_tdd/data/models/ticket_detail_models/ticket.dart';
-import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'json_objects.dart';
+import '../data_setup/json_objects.dart';
 import 'package:dio/dio.dart' hide Headers;
 import 'package:flutter_app_tdd/core/network/server_error.dart';
 

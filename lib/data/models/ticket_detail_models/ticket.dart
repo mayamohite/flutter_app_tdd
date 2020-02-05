@@ -46,6 +46,22 @@ class Ticket {
         airline: Airline.fromJson(json["airline"]));
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['from'] = this.from;
+    data['to'] = this.to;
+    data['flight_number'] = this.flightNumber;
+    data['departure'] = this.departure;
+    data['arrival'] = this.arrival;
+    data['duration'] = this.duration;
+    data['instructions'] = this.instructions;
+    data['stops'] = this.numberOfStops;
+    if (this.airline != null) {
+      data['airline'] = this.airline.toJson();
+    }
+    return data;
+  }
+
   setPrice(price) {
     this.price = price;
     isPriceError = false;

@@ -1,5 +1,4 @@
 class JsonObjects {
-
   static var price = {
     "price": 3560,
     "seats": 37,
@@ -7,6 +6,16 @@ class JsonObjects {
     "flight_number": "6E-ARI",
     "from": "DEL",
     "to": "CHE"
+  };
+
+  static var price_without_parameters = {
+    "flight_number": "6E-ARI",
+    "from": null,
+    "to": null,
+  };
+
+  static var airline_without_parameters = {
+    "name": null,
   };
 
   static var ticket = {
